@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+echo "Welcome to Stez'z AUR Helper"
+echo "Please wait...installing packages"
+
+mkdir /tmp/aurFiles -p
+cd /tmp/aurFiles
+
+for PKG in $@
+do	
+	if [ ${PKG::1} == "-" ]
+	then 
+		VARS="$VARS $PKG"
+		continue
+	fi
+	wget https://aur.archlinux.org/packages/${PKG::2}/${PKG}/${PKG}.tar.gz
+	tar -xvf ${PKG}.tar.gz
+	cd ${PKG}
+	makepkg -is $VARS $PKG
+done

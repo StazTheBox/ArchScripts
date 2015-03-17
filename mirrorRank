@@ -1,0 +1,6 @@
+echo "Welcome to Staz'z Automated Mirror Ranker"
+
+rankmirrors /etc/pacman.d/mirrorlist > /tmp/mirrorList
+
+cat /tmp/mirrorList | grep -v "## Score" > /tmp/mirrorList2
+sudo mv /tmp/mirrorList2 /etc/pacman.d/mirrorlist2

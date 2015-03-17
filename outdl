@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+echo "Welcome to Stez'z ARM Helper"
+echo "Please wait...installing packages"
+echo "Make sure to modify me, I do not smart. I do not know what os type your running!"
+#MODIFY ME MODIFY ME
+TYPE="x86_64"
+
+mkdir /tmp/armFiles
+cd /tmp/armFiles
+
+for PKG in $@
+do
+	
+	if [ ${PKG::1} == "-" ]
+	then 
+		VARS="$VARS $PKG"
+		continue
+	fi
+	wget https://seblu.net/a/arm/all/${PKG}-1-${TYPE}.pkg.tar.xz -O ${PKG}.pkg.tar.xz
+	sudo pacman -U $VARS ${PKG}.pkg.tar.xz
+done
